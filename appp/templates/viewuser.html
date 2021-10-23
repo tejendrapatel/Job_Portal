@@ -1,0 +1,36 @@
+{%load static %}
+{% block body %}
+{% include 'adminnav.html' %}
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">View All Student Users</p>
+</marquee>
+<div class="container mt-2">
+<table class="table table-hover mt-2" id="example">
+    <thead>
+        <tr style="background-color:darkkhaki;">
+            <th>S.No.</th>
+            <th>Full Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in data %}
+        <tr  style="background-color:rgb(236, 250, 159);">
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+            <td>{{i.mobile}}</td>
+            <td>{{i.user.username}}</td>
+            <td>{{i.gender}}</td>
+            <td><img src="{{ i.image.url }}" width="100px" height="100px"></td>
+            <td><a href="{% url 'deleteuser' i.user.id%}" class="btn btn-danger" onclick="return confirm('Are you really want to delete')">Delete</a></td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

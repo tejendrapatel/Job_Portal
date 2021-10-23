@@ -1,0 +1,49 @@
+{%load static%}
+{%block body%}
+{% include 'recruiternav.html' %}
+<script>
+    function checkpass()
+    {
+    if(document.changepassword.npwd.value!=document.changepassword.cnpwd.value)
+    {
+    alert('New password and confirm password does not match');
+    document.changepassword.cnpwd.focus();
+    return false;
+    }
+    return true;
+    }
+</script>
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">Change Password</p>
+</marquee>
+<div>
+    <form style="margin:2% 10% 0% 10%;" name="changepassword" onsubmit="return checkpass()" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <label><b>Name</b></label>
+        <input type="text" class="form-control" name="uname" value="{{v.username}}">
+        <label><b>Current Password</b></label>
+        <input type="password" name="cpwd" class="form-control" required>
+        <label><b>New Password</b></label>
+        <input type="password" name="npwd" class="form-control" required>
+        <label><b>Confirm New Password</b></label>
+        <input type="password" name="cnpwd" class="form-control" required>
+        <input type="submit" class="btn btn-primary mt-2">
+    </form>
+</div>
+{% ifequal error "no" %}
+<script>
+    alert(" Password Changed Successfully");
+    window.location=('{% url 'Logout' %}')
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert("something went wrong,try again...");
+</script>
+{%endifequal%}
+{% ifequal error "not" %}
+<script>
+    alert("your current password is wrong");
+</script>
+{%endifequal%}
+{%endblock%}

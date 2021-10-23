@@ -1,0 +1,30 @@
+{% load static %}
+{% block body %}
+{% include 'navigation.html' %}
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">User Login</p>
+</marquee>
+<div>
+    <form style="margin:2% 10% 0% 10%;" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <label><b>Email</b></label>
+        <input type="email" class="form-control" name=eml placeholder="Email Id" required>
+        <label><b>Password</b></label>
+        <input type="password" class="form-control" name=pwd placeholder="password" required><br>
+        <input type="submit" value="Login" class="btn btn-primary">
+        <a href="{% url 'signup' %}" class="btn btn-primary">Create Account</a>
+    </form>
+
+{% ifequal error "no" %}
+<script>
+    alert(" Login Successfully");
+    window.location=('{% url 'userhome' %}')
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert("invalid credential,try again...");
+</script>
+</div>
+{% endifequal %}
+{% endblock %}

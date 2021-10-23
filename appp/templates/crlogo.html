@@ -1,0 +1,28 @@
+{% load static %}
+{% block body %}
+{% include 'recruiternav.html '%}
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">Change Profile Picture</p>
+</marquee>
+<form  class="container" style="margin: 2% 10% 0% 10%;" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form group col-md-12">
+            <img src="{{rec.image.url}}" width="100" height="100" ><br>
+            <input type="file" class="form-control" name="logo" required>
+        </div>
+    </div>
+    <input type="submit" value="submit" class="btn btn-primary" >
+</form>
+{% ifequal error "no" %}
+<script>
+    alert("Logo has been updated");
+    window.location=('{% url 'recruiterhome' %}')
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert("Something went wrong,try again...");
+</script>
+{% endifequal %}
+{% endblock %}

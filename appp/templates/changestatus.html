@@ -1,0 +1,31 @@
+{%load static%}
+{%block body%}
+{% include 'adminnav.html' %}
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">Change Recruiters Status</p>
+</marquee>
+<div>
+    <form style="margin:2% 10% 0% 10%;" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <label><b>Recruiter Name</b></label>
+        <input type="text" class="form-control" name="uname" readonly value="{{recruiter.user.first_name}} {{recruiter.user.last_name}}">
+        <label><b>Status</b></label>
+        <select class="form-control" name="status">
+            <option value="Accept">Accept</option>
+            <option value="Reject">Reject</option>
+        </select><br>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+{% ifequal error "no" %}
+<script>
+    alert(" Status Changed Successfully");
+    window.location=('{% url 'allrecruiter' %}')
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert("something went wrong,try again...");
+</script>
+{%endifequal%}
+{%endblock%}

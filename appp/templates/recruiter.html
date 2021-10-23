@@ -1,0 +1,40 @@
+{% load static %}
+{% block body %}
+{% include 'navigation.html' %}
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">Recruiter Login</p>
+</marquee>
+<div>
+    <form style="margin:2% 10% 0% 10%;" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <label><b>Username</b></label>
+        <input type="text" class="form-control" name="user" placeholder="username" required>
+        <label><b>Password</b></label>
+        <input type="password" class="form-control" name="pwd" placeholder="password"><br>
+        <input type="submit" class="btn btn-primary">
+        <a href="{% url 'recsignup' %}" class="btn btn-primary">Create Account</a>
+    </form>
+</div>
+{% ifequal error "no" %}
+<script>
+    alert(" Login Successfully");
+    window.location=('{% url 'recruiterhome' %}')
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert("invalid credential,try again...");
+</script>
+{% endifequal %}
+{% ifequal error "not" %}
+<script>
+    alert("Your staus is pending,try after some time....");
+</script>
+{% endifequal %}
+{% ifequal error "out" %}
+<script>
+    alert("Your application get rejected by admin,");
+</script>
+{% endifequal %}
+
+{% endblock %}

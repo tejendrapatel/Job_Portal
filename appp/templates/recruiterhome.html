@@ -1,0 +1,48 @@
+{% load static %}
+{% block body %}
+{% include 'recruiternav.html '%}
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">Your Profile</p>
+</marquee>
+<form  class="container" name="signup" style="margin: 2% 10% 0% 10%;" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <div class="form-row">
+    <div class="form-group col-md-8">
+        <label>First Name</label>
+        <input type="text" class="form-control" name="fname" value="{{rec.user.first_name}}">
+        <label>Last Name</label>
+        <input type="text" class="form-control" name="lname" value="{{rec.user.last_name}}">
+        <label>Contact No.</label>
+        <input type="text" class="form-control" name="contact" value="{{rec.mobile}}">
+        <label>Gender[{{rec.gender}}]</label>
+        <select class="form-control" name="gender" >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <label>Email</label>
+        <input type="email" class="form-control" name="email" value="{{rec.user.username}}" readonly>
+        <label>Company Name</label>
+        <input type="text" name="company" class="form-control" value="{{rec.company}}" readonly>    
+    </div>
+    <div class="form-group col-md-4">
+        <div class="box" style="padding-left: 30%;">
+        <img  src="{{rec.image.url}}" style="width: 350;height: 350;border-style:outset;border-color: grey;" >
+        <a class="btn btn-primary mt-4" href="{% url 'crlogo' rec.id %}">Change picture</a>
+    </div>
+    </div>
+    </div>
+    <input type="submit" value="Update" class="btn btn-primary" >
+</form>
+{% ifequal error "no" %}
+<script>
+    alert("updated Successfully");
+    window.location=('{% url 'recruiterhome' %}')
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert("Something went wrong,try again...");
+</script>
+{% endifequal %}
+
+{%endblock%}

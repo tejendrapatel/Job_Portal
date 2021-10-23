@@ -1,0 +1,50 @@
+{% load static %}
+{% block body %}
+{% include 'recruiternav.html '%}
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">Add Jobs</p>
+</marquee>
+<form  class="container" style="margin: 2% 10% 0% 10%;" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <div class="form-row">
+    <div class="form-group col-md-6">
+        <label>Job Title</label>
+        <input type="text" class="form-control" name="title" placeholder="Enter title" required>
+        <label>Start Date</label>
+        <input type="date" class="form-control" name="sdate"  required>
+        <label>End Date</label>
+        <input class="form-control" type="date" name="edate">
+        <label>Company Logo</label>
+        <input type="file" class="form-control" name="logo" required>
+    </div>
+    <div class="form-group col-md-6">
+        <label>Salary</label>
+        <input type="text" class="form-control" name="salary" required>
+        <label>Experience</label>
+        <input type="text" class="form-control" name="exp" placeholder="Enter experience" required>
+        <label>Skills(annual)</label>
+        <input type="text" class="form-control" name="skill" placeholder="Enter skills" required>
+        <label>Description</label>
+        <textarea type="text" class="form-control" name="des" required></textarea>  
+    </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Location</label>
+            <input class="form-control" name="location" type="text" placeholder="Enter location" required>
+        </div>
+    </div>
+    <input type="submit" value="submit" class="btn btn-primary" >
+</form>
+{% ifequal error "no" %}
+<script>
+    alert("Job Detail has been added");
+    window.location=('{% url 'joblist' %}')
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert("Something went wrong,try again...");
+</script>
+{% endifequal %}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% load static %}
+{% block body %}
+{% include 'recruiternav.html '%}
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">Edit Job Details</p>
+</marquee>
+<form  class="container" style="margin: 2% 10% 0% 10%;" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <div class="form-row">
+    <div class="form-group col-md-6">
+        <img src="{{job.image.url}}" width="100" height="100"><button class="btn btn-primary ml-5"><a href="{%url 'changelogo' job.id %}" style="color: white;">Change Company logo</a></button><br>
+        <label>Job Title</label>
+        <input type="text" class="form-control" name="title" value="{{job.title}}" >
+        <label>Start Date [{{job.start_date}}]</label>
+        <input type="date" class="form-control" name="sdate"  >
+        <label>End Date[{{job.end_date}}]</label>
+        <input class="form-control" type="date" name="edate">
+    </div>
+    <div class="form-group col-md-6">
+        <label>Salary</label>
+        <input type="text" class="form-control" name="salary" value="{{job.salary}}">
+        <label>Experience</label>
+        <input type="text" class="form-control" name="exp" value="{{job.experience}}">
+        <label>Skills(annual)</label>
+        <input type="text" class="form-control" name="skill" value="{{job.skills}}">
+        <label>Description</label>
+        <textarea type="text" class="form-control" name="des" >{{job.description}}</textarea>  
+    </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Location</label>
+            <input class="form-control" name="location" type="text" value="{{job.Location}}">
+        </div>
+    </div>
+    <input type="submit" value="submit" class="btn btn-primary" >
+</form>
+{% ifequal error "no" %}
+<script>
+    alert("Job Detail has been updated");
+    window.location=('{% url 'joblist' %}')
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert("Something went wrong,try again...");
+</script>
+{% endifequal %}
+{% endblock %}

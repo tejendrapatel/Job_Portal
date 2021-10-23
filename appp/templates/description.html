@@ -1,0 +1,44 @@
+{% load static %}
+{% block body %}
+{% include 'usernav.html '%}
+<style>
+    tr{
+        text-align: center;
+    }
+</style>
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">Available Jobs</p>
+</marquee>
+<div class="container mt-2">
+    <table class="table table-hover mt-2" id="example">
+        <thead>
+            <tr style="background-color:darkkhaki;">
+                <th>S.No.</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>salary</th>
+                <th>Experience</th>
+                <th>Image</th>
+                <th>SKills</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in job %}
+            <tr  style="background-color:rgb(236, 250, 159);">
+                <td>{{forloop.counter}}</td>
+                <td>{{i.title}}</td>
+                <td>{{i.description}}</td>
+                <td>{{i.Location}}</td>
+                <td>{{i.salary}}</td>
+                <td>{{i.experience}}</td>
+                <td><img src="{{ i.image.url }}" width="70px" height="70px"></td>
+                <td>{{i.skills}}</td>
+            
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% load static %}
+<div class="footer">
+<div style="background-color:  rgb(44, 92, 76); width: 100%; margin-top: 4px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mt-3">
+                <h3 class="text-white">Contact Info</h3>
+                <p style="color: greenyellow;font-size: 18px;"><i class="fa fa-map-marker text-danger"> </i> Bhel Nagar,Ayodhya Bypass,Bhopal</p>
+                <p style="color: greenyellow;font-size: 18px;"><i class="fa fa-envelope text-danger"> </i> encorevj13@gmail.com</p>
+                <p style="color: greenyellow;font-size: 18px;"><i class="fa fa-mobile text-danger"> </i> +91 7770877002</p>
+                <p style="color: greenyellow;font-size: 18px;"><i class="fa fa-globe text-danger"> </i> Bhel Nagar,Ayodhya Bypass,Bhopal</p>
+            </div>
+            <div class="col-md-4 mt-3">
+                    <center>
+                    <h3 class="text-white">More</h3>
+                    <a href="{% url 'index' %}" style="margin-left:;color: greenyellow"><i class="fa fa-home mr-1"></i>Home</a><br><br>
+                    <a href="{% url 'index' %}" style="margin-left:;color: greenyellow"><i class="fa fa-users mr-1"></i>Latest Job</a><br><br>
+                    <a href="{% url 'userlogin' %}" style="margin-left:;color: greenyellow"><i class="fa fa-user-plus mr-1"></i>User</a><br><br>
+                    <a href="{% url 'index' %}" style="margin-left:;color: greenyellow;"><i class="fa fa-phone mr-1"></i>Contact Us</a>
+                    </center>
+            </div>
+            <div class="col-md-4 mt-3">
+                <h3 class="text-white">Newsletter</h3>
+                <p style="color: greenyellow;">For more information provide your email here.</p>
+                <form>
+                    {% csrf_token %}
+                    <input type="text" placeholder="enter your email" class="form-control" required>
+                    <input type="submit" value="send" class="btn btn-primary mt-2">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,30 @@
+{% load static %}
+{% block body %}
+{% include 'navigation.html' %}
+<marquee style="background: grey;margin-top: 1%;">
+    <p style="margin-top: .5%;color: white;font-weight:20;">Admin Login</p>
+</marquee>
+<div>
+    <form style="margin:2% 10% 0% 10%;" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <label><b>Username</b></label>
+        <input type="text" class="form-control" name="uname" placeholder="username" required>
+        <label><b>Password</b></label>
+        <input type="password" class="form-control" name="pwd" placeholder="password"required><br>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+{% ifequal error "no" %}
+<script>
+    alert(" Login Successfully");
+    window.location=('{% url 'adminhome' %}')
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert("invalid credential,try again...");
+</script>
+{% endifequal %}
+
+
+{% endblock %}
